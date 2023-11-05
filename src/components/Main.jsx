@@ -20,10 +20,11 @@ const Main = () => {
     formData,
     personalData,
     setPersonalData,
-    contactlinks,
-    setContactLinks,
     template,
     headerStyle,
+    professionalSummary,
+    contactlinks,
+    setContactLinks,
   } = useData();
   const [portfolioHTML, setportfolioHTML] = useState("");
   const [isLoading, setisLoading] = useState(false);
@@ -37,7 +38,7 @@ const Main = () => {
   Name: ${personalData.name}
   Header Position: ${headerStyle}
   Image URL : ${personalData.imageUrl}
-  Professional Summary: ${formData.professionalSummary}
+  Professional Summary: ${personalData.professionalSummary}
   Experience: ${formData.experience.map(
     (entry) => `\n- ${entry.jobTitle} at ${entry.company}`
   )}
@@ -45,9 +46,9 @@ const Main = () => {
     (entry) => `\n- ${entry.graduationYear} at ${entry.institutionName}`
   )}
   Skills: ${formData.skills.join(", ")}
-  Contact: GitHub - ${formData.contact.githubURL}, LinkedIn - ${
-      formData.contact.linkedinURL
-    }, Twitter - ${formData.contact.twitterURL}
+  Contact: GitHub - ${contactlinks.github}, LinkedIn - ${
+      contactlinks.linkedin
+    }, Twitter - ${contactlinks.twitter}
   Colors: Primary - ${formData.colors.primary}, Secondary - ${
       formData.colors.secondary
     }, Background - ${formData.colors.background}
@@ -135,12 +136,40 @@ const Main = () => {
             placeholder="Enter your Image URL"
             icon="link"
           />
+          <Input
+            value={personalData.professionalSummary}
+            onValueChange={(professionalSummary) => {
+              setPersonalData({ ...personalData, professionalSummary });
+            }}
+            placeholder="Add Profile Summary"
+          />
           <Input placeholder="Job Title" icon="job" />
           <Input placeholder="Company Name" icon="job" />
           <Input placeholder="Enter your skills" icon="job" />
-          <Input placeholder="Enter your Github URL" icon="github" />
-          <Input placeholder="Enter your LinkedIn URL" icon="linkedin" />
-          <Input placeholder="Enter your Twitter URL" icon="twitter" />
+          <Input
+            value={contactlinks.github}
+            onValueChange={(github) => {
+              setContactLinks({ ...contactlinks, github });
+            }}
+            placeholder="Enter your Github URL"
+            icon="github"
+          />
+          <Input
+            value={contactlinks.linkedin}
+            onValueChange={(linkedin) => {
+              setContactLinks({ ...contactlinks, linkedin });
+            }}
+            placeholder="Enter your LinkedIn URL"
+            icon="linkedin"
+          />
+          <Input
+            value={contactlinks.twitter}
+            onValueChange={(twitter) => {
+              setContactLinks({ ...contactlinks, twitter });
+            }}
+            placeholder="Enter your Twitter URL"
+            icon="twitter"
+          />
 
           <div className="flex justify-center">
             <Button onClick={() => submitRequest(formData)} />

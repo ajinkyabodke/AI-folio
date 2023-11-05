@@ -5,11 +5,12 @@ import job from "../assets/job.svg";
 import github from "../assets/github.svg";
 import linkedin from "../assets/linkedin.svg";
 import twitter from "../assets/twitter.svg";
+import summary from "../assets/summary.svg";
 import { useData } from "../contexts/appContext";
 function Input({
   placeholder = "Github",
   type = "text",
-  icon = "twitter",
+  icon = "summary",
   onValueChange,
   value,
 }) {
@@ -29,7 +30,7 @@ function Input({
         </label>
         <div className="relative w-full">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <img className="w-4 h-4" src={icons[icon]} />
+            {icon && <img className="w-4 h-4" src={icons[icon]} />}
           </div>
           <input
             type={type}

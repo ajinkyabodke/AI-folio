@@ -29,18 +29,22 @@ export function AppProvider({ children }) {
 
   const templates = ["Professional", "Creative", "Academic"];
   const [template, setTemplate] = useState("Professional");
+
   const headerStyles = ["Top Header", "Side Header"];
   const [headerStyle, setheaderStyle] = useState("Top Header");
 
   const [personalData, setPersonalData] = useState({
     name: "",
     imageUrl: "",
+    professionalSummary: "",
   });
+
   const [contactlinks, setContactLinks] = useState({
     github: "",
     twitter: "",
     linkedin: "",
   });
+  
 
   const handleTemplateChange = setTemplate;
   const handleHeaderStyle = setheaderStyle;
