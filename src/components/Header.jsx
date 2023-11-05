@@ -10,7 +10,7 @@ const Header = () => {
   }
   return (
     <nav className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 w-full">
-      <div className="flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="flex flex-wrap items-center justify-between p-4">
         <Link to="/" className="flex items-center">
           <img src={reactIcon} className="h-8 mr-3" alt="React Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-green-400">

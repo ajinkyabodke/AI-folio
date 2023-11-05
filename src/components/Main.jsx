@@ -13,7 +13,7 @@ import HeaderSelectors from "./HeaderSelector";
 const Main = () => {
   const radioOptions = ["professional", "creative", "academic"];
   const colorOptions = ["Primary", "Secondary", "Background"];
-
+  const [htmlCode, setHtmlCode] = useState("");
   const {
     formData,
     personalData,
@@ -105,21 +105,27 @@ const Main = () => {
   return (
     <div className="container mx-auto p-5 ">
       {isLoading ? (
-        <div className="w-full ml-60 h-screen ">
+        <div className="w-full flex justify-center items-center h-screen ">
           <Loader />
         </div>
       ) : isSuccess ? (
         <>
-          <div className="w-full h-[400px] mx-auto bg-white p-4 shadow-md rounded-md">
-            <h1 className="text-xl font-semibold mb-4">Preview</h1>
-
-            <iframe className="w-full  h-[400px]" srcDoc={portfolioHTML} />
-          </div>
-          <div className="max-w-xl mx-auto bg-white p-4 shadow-md rounded-md">
-            <h1 className="text-xl font-semibold mb-4">Code</h1>
-            <pre className="bg-gray-200 p-4 rounded-md">
-              <code className="text-sm font-mono">{portfolioHTML}</code>
-            </pre>
+          <div className="flex-col justify-center items-center h-min">
+            <div className=" p-4">
+              <h1 className="text-2xl font-bold mb-4">Code Preview</h1>
+              <div
+                className="border rounded p-4 bg-gray-100"
+                dangerouslySetInnerHTML={{ __html: portfolioHTML }}
+              ></div>
+            </div>
+            <div className="p-4">
+              <h1 className="text-2xl font-bold mb-4">HTML Code</h1>
+              <textarea
+                className="border rounded p-4 w-full h-64 bg-gray-100"
+                value={portfolioHTML}
+                onChange={(e) => setHtmlCode(e.target.value)}
+              ></textarea>
+            </div>
           </div>
         </>
       ) : (
