@@ -33,6 +33,9 @@ const Main = () => {
     handleEducationChange,
     education,
     setEducation,
+    handleAddSkill,
+    handleRemoveSkill,
+    handleSkillChange,
   } = useData();
   const [portfolioHTML, setportfolioHTML] = useState("");
   const [isLoading, setisLoading] = useState(false);
@@ -120,6 +123,7 @@ const Main = () => {
           </div>
         </>
       ) : (
+        
         <div className="">
           <div className="px-4">
             <TemplateSelector />
@@ -128,10 +132,13 @@ const Main = () => {
           <div className="px-4">
             <HeaderSelectors />
           </div>
+
           <div className="px-2">
+
             <label className="block px-2 text-xl font-medium text-gray-300">
               Personal Details
             </label>
+
             <Input
               value={personalData.name}
               onValueChange={(name) => {
@@ -149,6 +156,7 @@ const Main = () => {
               placeholder="Enter your Image URL"
               icon="link"
             />
+
             <Input
               value={personalData.professionalSummary}
               onValueChange={(professionalSummary) => {
@@ -158,122 +166,164 @@ const Main = () => {
             />
           </div>
 
-          <label className="block px-4 text-xl font-medium text-gray-300">
-            Experience
-          </label>
-          <div className="p-4">
-            {formData.experience.map((exp, index) => (
-              <div key={index} className="flex items-center mb-2">
-                <input
-                  type="text"
-                  name="jobTitle"
-                  placeholder="Job Title"
-                  value={exp.jobTitle}
-                  onChange={(e) => handleExperienceChange(e, index)}
-                  className="form-input w-1/3 mr-2bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
+          <div className="py-2">
+            <label className="block px-4 text-xl font-medium text-gray-300">
+              Experience
+            </label>
+            <div className="px-4 ">
+              {formData.experience.map((exp, index) => (
+                <div key={index} className="flex items-center mb-2">
+                  <input
+                    type="text"
+                    name="jobTitle"
+                    placeholder="Job Title"
+                    value={exp.jobTitle}
+                    onChange={(e) => handleExperienceChange(e, index)}
+                    className="form-input w-1/3 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
 
-                <input
-                  type="text"
-                  name="companyName"
-                  placeholder="Company Name"
-                  value={exp.companyName}
-                  onChange={(e) => handleExperienceChange(e, index)}
-                  className="form-input w-1/3 mr-2bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleRemoveExperience(index)}
-                  className="text-red-600  hover:text-red-800"
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-            <button
-              type="button"
-              onClick={handleAddExperience}
-              className="mt-2 bg-gray-400 text-white px-3 py-1 rounded hover:bg-blue-600"
-            >
-              Add Experience
-            </button>
+                  <input
+                    type="text"
+                    name="companyName"
+                    placeholder="Company Name"
+                    value={exp.companyName}
+                    onChange={(e) => handleExperienceChange(e, index)}
+                    className="form-input w-1/3 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveExperience(index)}
+                    className="text-red-600  hover:text-red-800"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={handleAddExperience}
+                className="mt-2 bg-gray-400 text-white px-3 py-1 rounded hover:bg-blue-600"
+              >
+                Add Experience
+              </button>
+            </div>
           </div>
 
-          <label className="block px-4 text-xl font-medium text-gray-300">
-            Education
-          </label>
-          <div className="p-4">
-            {education.map((edu, index) => (
-              <div key={index} className="flex items-center mb-2">
-                <input
-                  type="text"
-                  name="graduationYear"
-                  placeholder="Graduation Year"
-                  value={edu.graduationYear}
-                  onChange={(e) => handleEducationChange(e, index)}
-                  className="form-input w-1/3 mr-2bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
-                <input
-                  type="text"
-                  name="institutionName"
-                  placeholder="Institution Name"
-                  value={edu.institutionName}
-                  onChange={(e) => handleEducationChange(e, index)}
-                  className="form-input w-1/3 mr-2bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
-                <input
-                  type="text"
-                  name="relevantCourses"
-                  placeholder="Relevant Courses"
-                  value={edu.relevantCourses}
-                  onChange={(e) => handleEducationChange(e, index)}
-                  className="form-input w-1/3 mr-2bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleRemoveEducation(index)}
-                  className="text-red-600 hover:text-red-800"
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-            <button
-              type="button"
-              onClick={handleAddEducation}
-              className="mt-2 bg-gray-400 text-white px-3 py-1 rounded hover:bg-blue-600"
-            >
-              Add Education
-            </button>
+          <div className="py-2">
+            <label className="block px-4 text-xl font-medium text-gray-300">
+              Education
+            </label>
+            <div className="px-4">
+              {education.map((edu, index) => (
+                <div key={index} className="flex items-center mb-2">
+                  <input
+                    type="text"
+                    name="graduationYear"
+                    placeholder="Graduation Year"
+                    value={edu.graduationYear}
+                    onChange={(e) => handleEducationChange(e, index)}
+                    className="form-input w-1/3 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                  <input
+                    type="text"
+                    name="institutionName"
+                    placeholder="Institution Name"
+                    value={edu.institutionName}
+                    onChange={(e) => handleEducationChange(e, index)}
+                    className="form-input w-1/3 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                  <input
+                    type="text"
+                    name="relevantCourses"
+                    placeholder="Relevant Courses"
+                    value={edu.relevantCourses}
+                    onChange={(e) => handleEducationChange(e, index)}
+                    className="form-input w-1/3 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveEducation(index)}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={handleAddEducation}
+                className="mt-2 bg-gray-400 text-white px-3 py-1 rounded hover:bg-blue-600"
+              >
+                Add Education
+              </button>
+            </div>
           </div>
 
-          <Input placeholder="Enter your skills" icon="job" />
-          <Input
-            value={contactlinks.github}
-            onValueChange={(github) => {
-              setContactLinks({ ...contactlinks, github });
-            }}
-            placeholder="Enter your Github URL"
-            icon="github"
-          />
-          <Input
-            value={contactlinks.linkedin}
-            onValueChange={(linkedin) => {
-              setContactLinks({ ...contactlinks, linkedin });
-            }}
-            placeholder="Enter your LinkedIn URL"
-            icon="linkedin"
-          />
-          <Input
-            value={contactlinks.twitter}
-            onValueChange={(twitter) => {
-              setContactLinks({ ...contactlinks, twitter });
-            }}
-            placeholder="Enter your Twitter URL"
-            icon="twitter"
-          />
+          <div className="py-2">
+            <label className="block px-4 text-xl font-medium text-gray-300">
+              Skills
+            </label>
+            <div className="px-4">
+              {formData.skills.map((skill, index) => (
+                <div key={index} className="flex items-center mb-2">
+                  <input
+                    type="text"
+                    name="skill"
+                    placeholder="Skill"
+                    value={skill}
+                    onChange={(e) => handleSkillChange(e, index)}
+                    className="form-input w-2/3 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveSkill(index)}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={handleAddSkill}
+                className="mt-2 bg-gray-400 text-white px-3 py-1 rounded hover:bg-blue-600"
+              >
+                Add Skill
+              </button>
+            </div>
+          </div>
 
-          <div className="flex justify-center">
+          <div>
+            <label className="block px-4 py-2 text-xl font-medium text-gray-300">
+              Socials
+            </label>
+            <Input
+              value={contactlinks.github}
+              onValueChange={(github) => {
+                setContactLinks({ ...contactlinks, github });
+              }}
+              placeholder="Enter your Github URL"
+              icon="github"
+            />
+            <Input
+              value={contactlinks.linkedin}
+              onValueChange={(linkedin) => {
+                setContactLinks({ ...contactlinks, linkedin });
+              }}
+              placeholder="Enter your LinkedIn URL"
+              icon="linkedin"
+            />
+            <Input
+              value={contactlinks.twitter}
+              onValueChange={(twitter) => {
+                setContactLinks({ ...contactlinks, twitter });
+              }}
+              placeholder="Enter your Twitter URL"
+              icon="twitter"
+            />
+          </div>
+
+          <div className="flex justify-center py-4">
             <Button onClick={() => submitRequest(formData)} />
           </div>
         </div>
