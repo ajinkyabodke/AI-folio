@@ -13,6 +13,7 @@ function Input({
   icon = "summary",
   onValueChange,
   value,
+  ...rest
 }) {
   const icons = {
     link: link,
@@ -38,6 +39,7 @@ function Input({
             placeholder={placeholder}
             onChange={(e) => onValueChange(e.target.value)}
             value={value}
+            {...rest}
           />
         </div>
       </form>

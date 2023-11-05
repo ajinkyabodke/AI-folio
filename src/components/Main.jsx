@@ -2,9 +2,7 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
 import { ColorPicker } from "../components/ColorPicker";
-import { RadioInput } from "../components/Radio";
-import RemoveButton from "../components/RemoveButton";
-import TextBox from "../components/TextBox";
+
 import Input from "../components/Input";
 import { useData } from "../contexts/appContext";
 import { API } from "../../constants";
@@ -25,6 +23,16 @@ const Main = () => {
     professionalSummary,
     contactlinks,
     setContactLinks,
+    jobSummary,
+    setJobSummary,
+    handleExperienceChange,
+    handleRemoveExperience,
+    handleAddExperience,
+    handleAddEducation,
+    handleRemoveEducation,
+    handleEducationChange,
+    education,
+    setEducation,
   } = useData();
   const [portfolioHTML, setportfolioHTML] = useState("");
   const [isLoading, setisLoading] = useState(false);
@@ -40,10 +48,11 @@ const Main = () => {
   Image URL : ${personalData.imageUrl}
   Professional Summary: ${personalData.professionalSummary}
   Experience: ${formData.experience.map(
-    (entry) => `\n- ${entry.jobTitle} at ${entry.company}`
+    (entry) => `\n- ${entry.jobTitle} at ${entry.companyName}`
   )}
-  Education: ${formData.education.map(
-    (entry) => `\n- ${entry.graduationYear} at ${entry.institutionName}`
+  education: ${education.map(
+    (entry) =>
+      `\n- ${entry.graduationYear} at ${entry.institutionName} and courses taken ${entry.relevantCourses}`
   )}
   Skills: ${formData.skills.join(", ")}
   Contact: GitHub - ${contactlinks.github}, LinkedIn - ${
@@ -116,35 +125,128 @@ const Main = () => {
             <TemplateSelector />
           </div>
 
-          <Input
-            value={personalData.name}
-            onValueChange={(name) => {
-              setPersonalData({ ...personalData, name });
-            }}
-            placeholder="Enter your Name"
-            icon="job"
-          />
           <div className="px-4">
             <HeaderSelectors />
           </div>
+          <div className="px-2">
+            <label className="block px-2 text-xl font-medium text-gray-300">
+              Personal Details
+            </label>
+            <Input
+              value={personalData.name}
+              onValueChange={(name) => {
+                setPersonalData({ ...personalData, name });
+              }}
+              placeholder="Enter your Name"
+              icon="job"
+            />
 
-          <Input
-            value={personalData.imageUrl}
-            onValueChange={(imageUrl) => {
-              setPersonalData({ ...personalData, imageUrl });
-            }}
-            placeholder="Enter your Image URL"
-            icon="link"
-          />
-          <Input
-            value={personalData.professionalSummary}
-            onValueChange={(professionalSummary) => {
-              setPersonalData({ ...personalData, professionalSummary });
-            }}
-            placeholder="Add Profile Summary"
-          />
-          <Input placeholder="Job Title" icon="job" />
-          <Input placeholder="Company Name" icon="job" />
+            <Input
+              value={personalData.imageUrl}
+              onValueChange={(imageUrl) => {
+                setPersonalData({ ...personalData, imageUrl });
+              }}
+              placeholder="Enter your Image URL"
+              icon="link"
+            />
+            <Input
+              value={personalData.professionalSummary}
+              onValueChange={(professionalSummary) => {
+                setPersonalData({ ...personalData, professionalSummary });
+              }}
+              placeholder="Add Profile Summary"
+            />
+          </div>
+
+          <label className="block px-4 text-xl font-medium text-gray-300">
+            Experience
+          </label>
+          <div className="p-4">
+            {formData.experience.map((exp, index) => (
+              <div key={index} className="flex items-center mb-2">
+                <input
+                  type="text"
+                  name="jobTitle"
+                  placeholder="Job Title"
+                  value={exp.jobTitle}
+                  onChange={(e) => handleExperienceChange(e, index)}
+                  className="form-input w-1/3 mr-2bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+
+                <input
+                  type="text"
+                  name="companyName"
+                  placeholder="Company Name"
+                  value={exp.companyName}
+                  onChange={(e) => handleExperienceChange(e, index)}
+                  className="form-input w-1/3 mr-2bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveExperience(index)}
+                  className="text-red-600  hover:text-red-800"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={handleAddExperience}
+              className="mt-2 bg-gray-400 text-white px-3 py-1 rounded hover:bg-blue-600"
+            >
+              Add Experience
+            </button>
+          </div>
+
+          <label className="block px-4 text-xl font-medium text-gray-300">
+            Education
+          </label>
+          <div className="p-4">
+            {education.map((edu, index) => (
+              <div key={index} className="flex items-center mb-2">
+                <input
+                  type="text"
+                  name="graduationYear"
+                  placeholder="Graduation Year"
+                  value={edu.graduationYear}
+                  onChange={(e) => handleEducationChange(e, index)}
+                  className="form-input w-1/3 mr-2bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <input
+                  type="text"
+                  name="institutionName"
+                  placeholder="Institution Name"
+                  value={edu.institutionName}
+                  onChange={(e) => handleEducationChange(e, index)}
+                  className="form-input w-1/3 mr-2bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <input
+                  type="text"
+                  name="relevantCourses"
+                  placeholder="Relevant Courses"
+                  value={edu.relevantCourses}
+                  onChange={(e) => handleEducationChange(e, index)}
+                  className="form-input w-1/3 mr-2bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveEducation(index)}
+                  className="text-red-600 hover:text-red-800"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={handleAddEducation}
+              className="mt-2 bg-gray-400 text-white px-3 py-1 rounded hover:bg-blue-600"
+            >
+              Add Education
+            </button>
+          </div>
+
           <Input placeholder="Enter your skills" icon="job" />
           <Input
             value={contactlinks.github}

@@ -39,12 +39,13 @@ export function AppProvider({ children }) {
     professionalSummary: "",
   });
 
+  const [education, setEducation] = useState([]);
+
   const [contactlinks, setContactLinks] = useState({
     github: "",
     twitter: "",
     linkedin: "",
   });
-  
 
   const handleTemplateChange = setTemplate;
   const handleHeaderStyle = setheaderStyle;
@@ -89,30 +90,30 @@ export function AppProvider({ children }) {
   };
 
   const handleAddEducation = () => {
-    setFormData({
-      ...formData,
-      education: [
-        //@ts-ignore
-        ...formData.education,
-        //@ts-ignore
-        { graduationYear: "", institutionName: "", relevantCourses: "" },
-      ],
-    });
+    // @ts-ignore
+    setEducation([
+      ...education,
+      {
+        graduationYear: "",
+        institutionName: "",
+        relevantCourses: "",
+      },
+    ]);
   };
-
   const handleRemoveEducation = (index) => {
-    const updatedEducation = [...formData.education];
+    const updatedEducation = [...education];
     updatedEducation.splice(index, 1);
-    //@ts-ignore
-    setFormData({ ...formData, education: updatedEducation });
+    // @ts-ignore
+    setEducation(updatedEducation);
   };
 
   const handleEducationChange = (e, index) => {
     const { name, value } = e.target;
-    const updatedEducation = [...formData.education];
+    const updatedEducation = [...education];
+    // @ts-ignore
     updatedEducation[index] = { ...updatedEducation[index], [name]: value };
-    //@ts-ignore
-    setFormData({ ...formData, education: updatedEducation });
+    // @ts-ignore
+    setEducation(updatedEducation);
   };
 
   const handleAddSkill = () => {
@@ -190,6 +191,8 @@ export function AppProvider({ children }) {
         setPersonalData,
         contactlinks,
         setContactLinks,
+        education,
+        setEducation,
       }}
     >
       {children}
