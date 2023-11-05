@@ -10,12 +10,10 @@ export function AppProvider({ children }) {
     skills: [],
 
     colors: {
-      primary: "",
-      secondary: "",
-      background: "",
+      primary: "#007BFF",
+      secondary: " #FF6B6B ",
+      background: "#F4F4F4",
     },
-    font: "",
-    fontSize: "",
   });
 
   const templates = ["Professional", "Creative", "Academic"];
@@ -23,6 +21,18 @@ export function AppProvider({ children }) {
 
   const headerStyles = ["Top Header", "Side Header"];
   const [headerStyle, setheaderStyle] = useState("Top Header");
+
+  const fontSizes = ["Small", "Medium", "Large"];
+  const [fontSize, setFontSize] = useState("Medium");
+
+  const fontStyles = [
+    "Montserrat",
+    "Roboto",
+    "Open Sans",
+    "Lato",
+    "Playfair Display",
+  ];
+  const [fontStyle, setFontStyle] = useState("Montserrat");
 
   const [personalData, setPersonalData] = useState({
     name: "",
@@ -40,6 +50,8 @@ export function AppProvider({ children }) {
 
   const handleTemplateChange = setTemplate;
   const handleHeaderStyle = setheaderStyle;
+  const handleFontSize = setFontSize;
+  const handleFontStyle = setFontStyle;
 
   const [portfolioHTML, setportfolioHTML] = useState("");
   const [isLoading, setisLoading] = useState(false);
@@ -157,6 +169,8 @@ export function AppProvider({ children }) {
         formData,
         setFormData,
         setisSuccess,
+        handleFontSize,
+        fontSize,
         isSuccess,
         isLoading,
         handleHeaderStyle,
@@ -176,6 +190,8 @@ export function AppProvider({ children }) {
         handleContactChange,
         handleColorsChange,
         handleSubmit,
+        handleFontStyle,
+        fontStyle,
         template,
         headerStyle,
         personalData,

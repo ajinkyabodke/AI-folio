@@ -9,11 +9,11 @@ import { API } from "../../constants";
 import Loader from "./Loader";
 import TemplateSelector from "./TemplateSelector";
 import HeaderSelectors from "./HeaderSelector";
+import ColorSelector from "./ColorSelector";
+import FontSizeSelector from "./FontSizeSelector";
+import FontSelector from "./FontSelector";
 
 const Main = () => {
-  const radioOptions = ["professional", "creative", "academic"];
-  const colorOptions = ["Primary", "Secondary", "Background"];
-  const [htmlCode, setHtmlCode] = useState("");
   const {
     formData,
     personalData,
@@ -21,10 +21,12 @@ const Main = () => {
     template,
     headerStyle,
     professionalSummary,
+    handleInputChange,
     contactlinks,
     setContactLinks,
     jobSummary,
     setJobSummary,
+    fontSize,
     handleExperienceChange,
     handleRemoveExperience,
     handleAddExperience,
@@ -36,7 +38,9 @@ const Main = () => {
     handleAddSkill,
     handleRemoveSkill,
     handleSkillChange,
+    fontStyle,
   } = useData();
+
   const [portfolioHTML, setportfolioHTML] = useState("");
   const [isLoading, setisLoading] = useState(false);
   const [isSuccess, setisSuccess] = useState(false);
@@ -64,8 +68,8 @@ const Main = () => {
     Colors: Primary - ${formData.colors.primary}, Secondary - ${
       formData.colors.secondary
     }, Background - ${formData.colors.background}
-    Font: ${formData.font}
-    Font Size: ${formData.fontSize}
+    Font: ${fontStyle}
+    Font Size: ${fontSize}
     ...`;
     return promptTemplate;
   }
@@ -137,9 +141,18 @@ const Main = () => {
           <div className="px-4">
             <HeaderSelectors />
           </div>
+          <div className="px-4 pb-2">
+            <ColorSelector />
+          </div>
+          <div className="px-4 pb-2">
+            <FontSelector />
+          </div>
+          <div className="px-4 pb-2">
+            <FontSizeSelector />
+          </div>
 
           <div className="px-2">
-            <label className="block px-2 text-xl font-medium text-gray-300">
+            <label className="block p-2 text-3xl font-medium text-gray-300">
               Personal Details
             </label>
 
@@ -171,7 +184,7 @@ const Main = () => {
           </div>
 
           <div className="py-2">
-            <label className="block px-4 text-xl font-medium text-gray-300">
+            <label className="block px-4 text-3xl font-medium text-gray-300">
               Experience
             </label>
             <div className="px-4 ">
@@ -214,7 +227,7 @@ const Main = () => {
           </div>
 
           <div className="py-2">
-            <label className="block px-4 text-xl font-medium text-gray-300">
+            <label className="block px-4 text-3xl font-medium text-gray-300">
               Education
             </label>
             <div className="px-4">
@@ -264,7 +277,7 @@ const Main = () => {
           </div>
 
           <div className="py-2">
-            <label className="block px-4 text-xl font-medium text-gray-300">
+            <label className="block px-4 text-3xl font-medium text-gray-300">
               Skills
             </label>
             <div className="px-4">
@@ -298,7 +311,7 @@ const Main = () => {
           </div>
 
           <div>
-            <label className="block px-4 py-2 text-xl font-medium text-gray-300">
+            <label className="block px-4 py-2 text-3xl font-medium text-gray-300">
               Socials
             </label>
             <Input

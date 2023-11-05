@@ -1,30 +1,30 @@
-// @ts-check
 import React from "react";
+
 import { useData } from "../contexts/appContext";
 
-const TemplateSelector = () => {
-  const { template, handleTemplateChange } = useData();
+function FontSizeSelector() {
+  const { fontSize, handleFontSize } = useData();
   return (
     <div className="mb-4">
       <label
         htmlFor="template"
         className="block text-3xl py-2 font-medium text-gray-300"
       >
-        Template Selection
+        Font Size Selection
       </label>
       <select
-        name="template"
-        id="template"
+        name="fontSize"
+        id="fontSize"
         className="form-select text-xl mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        onChange={(e) => handleTemplateChange(e.target.value)}
-        value={template}
+        onChange={(e) => handleFontSize(e.target.value)}
+        value={fontSize}
       >
-        <option value="Professional">Professional</option>
-        <option value="Creative">Creative</option>
-        <option value="Academic">Academic</option>
+        <option value="Small">Small</option>
+        <option value="Medium">Medium</option>
+        <option value="Large">Large</option>
       </select>
     </div>
   );
-};
+}
 
-export default TemplateSelector;
+export default FontSizeSelector;
