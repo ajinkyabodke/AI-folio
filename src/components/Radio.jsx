@@ -1,8 +1,8 @@
 import React from "react";
 import { useData } from "../contexts/appContext";
 
-export const RadioInput = ({ options }) => {
-  const { handleTemplateChange } = useData();
+export const RadioInput = ({ options, onValueChange }) => {
+  const { template, handleTemplateChange } = useData();
 
   return (
     <div>
@@ -17,11 +17,12 @@ export const RadioInput = ({ options }) => {
             <div className="flex items-center pl-3">
               <input
                 id={`horizontal-list-radio-${option}`}
+                defaultChecked={option === template}
                 type="radio"
                 value={option}
                 name="list-radio"
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
-                onChange={() => handleTemplateChange(option)}
+                onChange={() => onValueChange(option)}
               />
               <label
                 htmlFor={`horizontal-list-radio-${option}`}

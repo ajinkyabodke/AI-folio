@@ -1,8 +1,9 @@
+//@ts-check
 import { createContext, useContext, useState } from "react";
 
-const AppContext = createContext();
+const AppContext = createContext(null);
 
-const AppProvider = ({ children }) => {
+export function AppProvider({ children }) {
   const [formData, setFormData] = useState({
     template: "Professional",
     headerPosition: "top",
@@ -26,10 +27,24 @@ const AppProvider = ({ children }) => {
     fontSize: "",
   });
 
-  const [resHTML, setresHTML] = useState("");
-  const handleTemplateChange = (option) => {
-    setFormData({ ...formData, template: option });
-  };
+  const templates = ["Professional", "Creative", "Academic"];
+  const [template, setTemplate] = useState("Professional");
+  const headerStyles = ["Top Header", "Side Header"];
+  const [headerStyle, setheaderStyle] = useState("Top Header");
+
+  const [personalData, setPersonalData] = useState({
+    name: "",
+    imageUrl: "",
+  });
+  const [contactlinks, setContactLinks] = useState({
+    github: "",
+    twitter: "",
+    linkedin: "",
+  });
+
+  const handleTemplateChange = setTemplate;
+  const handleHeaderStyle = setheaderStyle;
+
   const [portfolioHTML, setportfolioHTML] = useState("");
   const [isLoading, setisLoading] = useState(false);
   const [isSuccess, setisSuccess] = useState(false);
@@ -49,6 +64,7 @@ const AppProvider = ({ children }) => {
   const handleAddExperience = () => {
     setFormData({
       ...formData,
+      //@ts-ignore
       experience: [...formData.experience, { jobTitle: "", companyName: "" }],
     });
   };
@@ -56,6 +72,7 @@ const AppProvider = ({ children }) => {
   const handleRemoveExperience = (index) => {
     const updatedExperience = [...formData.experience];
     updatedExperience.splice(index, 1);
+    //@ts-ignore
     setFormData({ ...formData, experience: updatedExperience });
   };
 
@@ -63,6 +80,7 @@ const AppProvider = ({ children }) => {
     const { name, value } = e.target;
     const updatedExperience = [...formData.experience];
     updatedExperience[index] = { ...updatedExperience[index], [name]: value };
+    //@ts-ignore
     setFormData({ ...formData, experience: updatedExperience });
   };
 
@@ -70,7 +88,9 @@ const AppProvider = ({ children }) => {
     setFormData({
       ...formData,
       education: [
+        //@ts-ignore
         ...formData.education,
+        //@ts-ignore
         { graduationYear: "", institutionName: "", relevantCourses: "" },
       ],
     });
@@ -79,6 +99,7 @@ const AppProvider = ({ children }) => {
   const handleRemoveEducation = (index) => {
     const updatedEducation = [...formData.education];
     updatedEducation.splice(index, 1);
+    //@ts-ignore
     setFormData({ ...formData, education: updatedEducation });
   };
 
@@ -86,12 +107,14 @@ const AppProvider = ({ children }) => {
     const { name, value } = e.target;
     const updatedEducation = [...formData.education];
     updatedEducation[index] = { ...updatedEducation[index], [name]: value };
+    //@ts-ignore
     setFormData({ ...formData, education: updatedEducation });
   };
 
   const handleAddSkill = () => {
     setFormData({
       ...formData,
+      //@ts-ignore
       skills: [...formData.skills, ""],
     });
   };
@@ -99,12 +122,14 @@ const AppProvider = ({ children }) => {
   const handleRemoveSkill = (index) => {
     const updatedSkills = [...formData.skills];
     updatedSkills.splice(index, 1);
+    //@ts-ignore
     setFormData({ ...formData, skills: updatedSkills });
   };
 
   const handleSkillChange = (e, index) => {
     const updatedSkills = [...formData.skills];
     updatedSkills[index] = e.target.value;
+    //@ts-ignore
     setFormData({ ...formData, skills: updatedSkills });
   };
 
@@ -122,11 +147,6 @@ const AppProvider = ({ children }) => {
     console.log(formData);
   };
 
-  const handleButtonClick = async () => {
-    const result = await submitRequest(formData);
-    // Handle the result as needed
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
     console.log(formData); // Log the form data to the console for debugging
@@ -134,13 +154,16 @@ const AppProvider = ({ children }) => {
   };
 
   return (
+    //@ts-ignore
     <AppContext.Provider
+      //@ts-ignore
       value={{
         formData,
         setFormData,
         setisSuccess,
         isSuccess,
         isLoading,
+        handleHeaderStyle,
         setisLoading,
         setportfolioHTML,
         handleTemplateChange,
@@ -156,17 +179,18 @@ const AppProvider = ({ children }) => {
         handleSkillChange,
         handleContactChange,
         handleColorsChange,
-        handleButtonClick,
         handleSubmit,
-        resHTML,
-        setresHTML,
+        template,
+        headerStyle,
+        personalData,
+        setPersonalData,
+        contactlinks,
+        setContactLinks,
       }}
     >
       {children}
     </AppContext.Provider>
   );
-};
+}
 
-const useData = () => useContext(AppContext);
-
-export { useData, AppProvider };
+export const useData = () => useContext(AppContext);

@@ -6,14 +6,14 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LandingPage/>,
+      element: <LandingPage />,
     },
     {
-      path: '/build',
-      element: <Home />
-    }
+      path: "/app",
+      element: <Home />,
+    },
   ]);
-  
+
   return (
     <>
       <RouterProvider router={router} />

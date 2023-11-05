@@ -7,8 +7,7 @@ import Loader from "../components/Loader";
 
 const Home = () => {
   const { resHTML, setresHTML, isLoading, isSuccess } = useData();
-  console.log("lod", isLoading);
-  console.log("s", isSuccess);
+ 
   return (
     <>
       <Header />
