@@ -5,19 +5,10 @@ const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
   const [formData, setFormData] = useState({
-    template: "Professional",
-    headerPosition: "top",
-    includePhoto: false,
-    imageURL: "",
-    professionalSummary: "",
     experience: [],
-    education: [],
+
     skills: [],
-    contact: {
-      githubURL: "",
-      linkedinURL: "",
-      twitterURL: "",
-    },
+
     colors: {
       primary: "",
       secondary: "",

@@ -45,28 +45,28 @@ const Main = () => {
     console.log("gpt:", formData);
     // Create a GPT prompt using the updated user input
     const promptTemplate = `Give me markup for portfolio in the form of website, with the following details:
-  Template: ${template}
-  Name: ${personalData.name}
-  Header Position: ${headerStyle}
-  Image URL : ${personalData.imageUrl}
-  Professional Summary: ${personalData.professionalSummary}
-  Experience: ${formData.experience.map(
-    (entry) => `\n- ${entry.jobTitle} at ${entry.companyName}`
-  )}
-  education: ${education.map(
-    (entry) =>
-      `\n- ${entry.graduationYear} at ${entry.institutionName} and courses taken ${entry.relevantCourses}`
-  )}
-  Skills: ${formData.skills.join(", ")}
-  Contact: GitHub - ${contactlinks.github}, LinkedIn - ${
+    Template: ${template}
+    Name: ${personalData.name}
+    Header Position: ${headerStyle}
+    Image URL : ${personalData.imageUrl}
+    Professional Summary: ${personalData.professionalSummary}
+     Experience: ${formData.experience.map(
+       (entry) => `\n- ${entry.jobTitle} at ${entry.companyName}`
+     )}
+    education: ${education.map(
+      (entry) =>
+        `\n- ${entry.graduationYear} at ${entry.institutionName} and courses taken ${entry.relevantCourses}`
+    )}
+    Skills: ${formData.skills.join(", ")}
+    Contact: GitHub - ${contactlinks.github}, LinkedIn - ${
       contactlinks.linkedin
     }, Twitter - ${contactlinks.twitter}
-  Colors: Primary - ${formData.colors.primary}, Secondary - ${
+    Colors: Primary - ${formData.colors.primary}, Secondary - ${
       formData.colors.secondary
     }, Background - ${formData.colors.background}
-  Font: ${formData.font}
-  Font Size: ${formData.fontSize}
-  ...`;
+    Font: ${formData.font}
+    Font Size: ${formData.fontSize}
+    ...`;
     return promptTemplate;
   }
 
@@ -77,19 +77,19 @@ const Main = () => {
       setisSuccess(false);
       console.log(generateGPTPrompt());
 
-      // const response = await fetch(`${API}/complete-text`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Accept: "application/json",
-      //   },
-      //   body: JSON.stringify({ prompt: generateGPTPrompt(formData) }),
-      // });
-      // if (!response.ok) {
-      //   throw new Error("Something went wrong on server side");
-      // }
-      // const jsonResponse = await response.json();
-      const HTML = "jsonResponse.output";
+      const response = await fetch(`${API}/complete-text`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ prompt: generateGPTPrompt() }),
+      });
+      if (!response.ok) {
+        throw new Error("Something went wrong on server side");
+      }
+      const jsonResponse = await response.json();
+      const HTML = jsonResponse.output;
       setportfolioHTML(HTML);
       setisSuccess(true);
       console.log(HTML);
@@ -113,17 +113,16 @@ const Main = () => {
           <div className="w-full h-[400px] mx-auto bg-white p-4 shadow-md rounded-md">
             <h1 className="text-xl font-semibold mb-4">Preview</h1>
 
-            <iframe className="w-full  h-[400px]" srcDoc={HTML} />
+            <iframe className="w-full  h-[400px]" srcDoc={portfolioHTML} />
           </div>
           <div className="max-w-xl mx-auto bg-white p-4 shadow-md rounded-md">
             <h1 className="text-xl font-semibold mb-4">Code</h1>
             <pre className="bg-gray-200 p-4 rounded-md">
-              <code className="text-sm font-mono">{HTML}</code>
+              <code className="text-sm font-mono">{portfolioHTML}</code>
             </pre>
           </div>
         </>
       ) : (
-        
         <div className="">
           <div className="px-4">
             <TemplateSelector />
@@ -134,7 +133,6 @@ const Main = () => {
           </div>
 
           <div className="px-2">
-
             <label className="block px-2 text-xl font-medium text-gray-300">
               Personal Details
             </label>
