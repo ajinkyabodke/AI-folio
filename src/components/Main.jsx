@@ -1,8 +1,5 @@
-// @ts-check
 import React, { useState } from "react";
 import Button from "../components/Button";
-import { ColorPicker } from "../components/ColorPicker";
-
 import Input from "../components/Input";
 import { useData } from "../contexts/appContext";
 import { API } from "../../constants";
@@ -133,7 +130,12 @@ const Main = () => {
           </div>
         </>
       ) : (
-        <div className="">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitRequest(formData);
+          }}
+        >
           <div className="px-4">
             <TemplateSelector />
           </div>
@@ -163,6 +165,7 @@ const Main = () => {
               }}
               placeholder="Enter your Name"
               icon="job"
+              required
             />
 
             <Input
@@ -180,6 +183,7 @@ const Main = () => {
                 setPersonalData({ ...personalData, professionalSummary });
               }}
               placeholder="Add Profile Summary"
+              required
             />
           </div>
 
@@ -191,6 +195,7 @@ const Main = () => {
               {formData.experience.map((exp, index) => (
                 <div key={index} className="flex items-center mb-2">
                   <input
+                    required
                     type="text"
                     name="jobTitle"
                     placeholder="Job Title"
@@ -200,6 +205,7 @@ const Main = () => {
                   />
 
                   <input
+                    required
                     type="text"
                     name="companyName"
                     placeholder="Company Name"
@@ -234,7 +240,8 @@ const Main = () => {
               {education.map((edu, index) => (
                 <div key={index} className="flex items-center mb-2">
                   <input
-                    type="text"
+                    required
+                    type="number"
                     name="graduationYear"
                     placeholder="Graduation Year"
                     value={edu.graduationYear}
@@ -242,6 +249,7 @@ const Main = () => {
                     className="form-input w-1/3 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                   <input
+                    required
                     type="text"
                     name="institutionName"
                     placeholder="Institution Name"
@@ -250,6 +258,7 @@ const Main = () => {
                     className="form-input w-1/3 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                   <input
+                    required
                     type="text"
                     name="relevantCourses"
                     placeholder="Relevant Courses"
@@ -284,6 +293,7 @@ const Main = () => {
               {formData.skills.map((skill, index) => (
                 <div key={index} className="flex items-center mb-2">
                   <input
+                    required
                     type="text"
                     name="skill"
                     placeholder="Skill"
@@ -321,6 +331,7 @@ const Main = () => {
               }}
               placeholder="Enter your Github URL"
               icon="github"
+              required
             />
             <Input
               value={contactlinks.linkedin}
@@ -329,6 +340,7 @@ const Main = () => {
               }}
               placeholder="Enter your LinkedIn URL"
               icon="linkedin"
+              required
             />
             <Input
               value={contactlinks.twitter}
@@ -337,13 +349,14 @@ const Main = () => {
               }}
               placeholder="Enter your Twitter URL"
               icon="twitter"
+              required
             />
           </div>
 
           <div className="flex justify-center py-4">
-            <Button onClick={() => submitRequest(formData)} />
+            <Button />
           </div>
-        </div>
+        </form>
       )}
     </div>
   );

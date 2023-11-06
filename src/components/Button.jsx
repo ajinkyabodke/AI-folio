@@ -4,7 +4,7 @@ import { useData } from "../contexts/appContext";
 function Button({ text = "Submit", ...rest }) {
   const { handleSubmit } = useData();
   const { formData } = useData();
-  // const [portfolioHTML, setportfolioHTML] = useState("");
+
   // const [isLoading, setisLoading] = useState(false);
   // const [isSuccess, setisSuccess] = useState(false);
   // const { resHTML, setresHTML } = useData();
