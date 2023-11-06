@@ -14,7 +14,7 @@ function ColorSelector() {
         <div className="flex  sm:flex-row items-center">
           <label
             htmlFor="primaryColor"
-            className="text-2xl px-2 text-slate-400"
+            className="text-2xl px-2 text-slate-200"
           >
             Primary Color :
           </label>
@@ -30,7 +30,7 @@ function ColorSelector() {
         <div className="flex sm:flex-row items-center">
           <label
             htmlFor="secondaryColor"
-            className="text-2xl px-2 text-slate-300"
+            className="text-2xl px-2 text-slate-200"
           >
             Secondary Color :
           </label>
