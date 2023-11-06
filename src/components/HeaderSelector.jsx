@@ -1,5 +1,4 @@
-// @ts-check
-import React from "react";
+
 import { useData } from "../contexts/appContext";
 
 const HeaderSelector = () => {

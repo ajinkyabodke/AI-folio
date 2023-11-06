@@ -4,6 +4,7 @@ import { useData } from "../contexts/appContext";
 function ColorSelector() {
   const { colorChange, formData, handleInputChange, handleColorsChange } =
     useData();
+  console.log(formData.colors);
   return (
     <>
       <label className="block text-3xl py-2 font-medium text-gray-300">
@@ -15,7 +16,7 @@ function ColorSelector() {
             htmlFor="primaryColor"
             className="text-2xl px-2 text-slate-400"
           >
-            Primary Color : 
+            Primary Color :
           </label>
           <input
             type="color"
@@ -31,7 +32,7 @@ function ColorSelector() {
             htmlFor="secondaryColor"
             className="text-2xl px-2 text-slate-300"
           >
-            Secondary Color : 
+            Secondary Color :
           </label>
           <input
             type="color"
@@ -47,13 +48,14 @@ function ColorSelector() {
             htmlFor="backgroundColor"
             className="text-2xl px-2 text-slate-200"
           >
-            Background Color : 
+            Background Color :
           </label>
           <input
             type="color"
             id="backgroundColor"
             name="backgroundColor"
             value={formData.colors.background}
+            defaultValue="#ffaabb"
             onChange={(e) => handleColorsChange(e, "background")}
             className="form-input"
           />

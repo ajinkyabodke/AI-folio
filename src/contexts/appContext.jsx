@@ -10,9 +10,9 @@ export function AppProvider({ children }) {
     skills: [],
 
     colors: {
-      primary: "#007BFF",
-      secondary: " #FF6B6B ",
-      background: "#F4F4F4",
+      primary: "#FF6B6B",
+      secondary: "#54D1DB",
+      background: "#F7F7F7",
     },
   });
 
@@ -95,7 +95,9 @@ export function AppProvider({ children }) {
   const handleAddEducation = () => {
     // @ts-ignore
     setEducation([
+      // @ts-ignore
       ...education,
+      // @ts-ignore
       {
         graduationYear: "",
         institutionName: "",
@@ -145,6 +147,7 @@ export function AppProvider({ children }) {
     const { name, value } = e.target;
     setFormData({
       ...formData,
+      // @ts-ignore
       contact: { ...formData.contact, [name]: value },
     });
   };
