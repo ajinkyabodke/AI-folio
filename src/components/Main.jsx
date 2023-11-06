@@ -9,6 +9,7 @@ import HeaderSelectors from "./HeaderSelector";
 import ColorSelector from "./ColorSelector";
 import FontSizeSelector from "./FontSizeSelector";
 import FontSelector from "./FontSelector";
+import RemoveButton from "./RemoveButton";
 
 const Main = () => {
   const {
@@ -213,13 +214,10 @@ const Main = () => {
                     onChange={(e) => handleExperienceChange(e, index)}
                     className="form-input w-1/3 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveExperience(index)}
-                    className="text-red-600  hover:text-red-800"
-                  >
-                    Remove
-                  </button>
+
+                  <div onClick={() => handleRemoveExperience(index)}>
+                    <RemoveButton />
+                  </div>
                 </div>
               ))}
               <button
@@ -266,13 +264,16 @@ const Main = () => {
                     onChange={(e) => handleEducationChange(e, index)}
                     className="form-input w-1/3 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
-                  <button
+                  {/* <button
                     type="button"
                     onClick={() => handleRemoveEducation(index)}
                     className="text-red-600 hover:text-red-800"
                   >
                     Remove
-                  </button>
+                  </button> */}
+                  <div onClick={() => handleRemoveEducation(index)}>
+                    <RemoveButton />
+                  </div>
                 </div>
               ))}
               <button
@@ -301,13 +302,10 @@ const Main = () => {
                     onChange={(e) => handleSkillChange(e, index)}
                     className="form-input w-2/3 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveSkill(index)}
-                    className="text-red-600 hover:text-red-800"
-                  >
-                    Remove
-                  </button>
+
+                  <div onClick={() => handleRemoveSkill(index)}>
+                    <RemoveButton />
+                  </div>
                 </div>
               ))}
               <button

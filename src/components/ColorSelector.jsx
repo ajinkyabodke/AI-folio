@@ -24,7 +24,7 @@ function ColorSelector() {
             name="primaryColor"
             value={formData.colors.primary}
             onChange={(e) => handleColorsChange(e, "primary")}
-            className="form-input"
+            className="form-input "
           />
         </div>
         <div className="flex sm:flex-row items-center">
